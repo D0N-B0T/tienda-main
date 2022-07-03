@@ -1,0 +1,63 @@
+﻿@model Venta_y_Gestion.Models.productos
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h3>Eliminar producto</h3>
+
+<h3>¿Estas seguro de eliminar este producto?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.productoNombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.productoNombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.productoPrecio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.productoPrecio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.productoStock)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.productoStock)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.productoImagen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.productoImagen)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tipoProducto.tipoProductoNombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tipoProducto.tipoProductoNombre)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

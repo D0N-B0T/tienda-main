@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="productos">
+          <Key>
+            <PropertyRef Name="productoId" />
+          </Key>
+          <Property Name="productoId" Type="int" Nullable="false" />
+          <Property Name="productoNombre" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="tipoProductoId" Type="int" Nullable="false" />
+          <Property Name="productoPrecio" Type="int" Nullable="false" />
+          <Property Name="productoStock" Type="int" Nullable="false" />
+          <Property Name="productoImagen" Type="varbinary(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tipoProducto">
+          <Key>
+            <PropertyRef Name="tipoProductoId" />
+          </Key>
+          <Property Name="tipoProductoId" Type="int" Nullable="false" />
+          <Property Name="tipoProductoNombre" Type="varchar" MaxLength="60" Nullable="false" />
+        </EntityType>
+        <Association Name="fk_tipo_producto">
+          <End Role="tipoProducto" Type="Self.tipoProducto" Multiplicity="1" />
+          <End Role="productos" Type="Self.productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipoProducto">
+              <PropertyRef Name="tipoProductoId" />
+            </Principal>
+            <Dependent Role="productos">
+              <PropertyRef Name="tipoProductoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BDModelStoreContainer">
+          <EntitySet Name="productos" EntityType="Self.productos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tipoProducto" EntityType="Self.tipoProducto" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fk_tipo_producto" Association="Self.fk_tipo_producto">
+            <End Role="tipoProducto" EntitySet="tipoProducto" />
+            <End Role="productos" EntitySet="productos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="productos">
+          <Key>
+            <PropertyRef Name="productoId" />
+          </Key>
+          <Property Name="productoId" Type="Int32" Nullable="false" />
+          <Property Name="productoNombre" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tipoProductoId" Type="Int32" Nullable="false" />
+          <Property Name="productoPrecio" Type="Int32" Nullable="false" />
+          <Property Name="productoStock" Type="Int32" Nullable="false" />
+          <Property Name="productoImagen" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <NavigationProperty Name="tipoProducto" Relationship="Self.fk_tipo_producto" FromRole="productos" ToRole="tipoProducto" />
+        </EntityType>
+        <EntityType Name="tipoProducto">
+          <Key>
+            <PropertyRef Name="tipoProductoId" />
+          </Key>
+          <Property Name="tipoProductoId" Type="Int32" Nullable="false" />
+          <Property Name="tipoProductoNombre" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="productos" Relationship="Self.fk_tipo_producto" FromRole="tipoProducto" ToRole="productos" />
+        </EntityType>
+        <Association Name="fk_tipo_producto">
+          <End Role="tipoProducto" Type="Self.tipoProducto" Multiplicity="1" />
+          <End Role="productos" Type="Self.productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipoProducto">
+              <PropertyRef Name="tipoProductoId" />
+            </Principal>
+            <Dependent Role="productos">
+              <PropertyRef Name="tipoProductoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BDEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="productos" EntityType="Self.productos" />
+          <EntitySet Name="tipoProducto" EntityType="Self.tipoProducto" />
+          <AssociationSet Name="fk_tipo_producto" Association="Self.fk_tipo_producto">
+            <End Role="tipoProducto" EntitySet="tipoProducto" />
+            <End Role="productos" EntitySet="productos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BDModelStoreContainer" CdmEntityContainer="BDEntities">
+          <EntitySetMapping Name="productos">
+            <EntityTypeMapping TypeName="BDModel.productos">
+              <MappingFragment StoreEntitySet="productos">
+                <ScalarProperty Name="productoId" ColumnName="productoId" />
+                <ScalarProperty Name="productoNombre" ColumnName="productoNombre" />
+                <ScalarProperty Name="tipoProductoId" ColumnName="tipoProductoId" />
+                <ScalarProperty Name="productoPrecio" ColumnName="productoPrecio" />
+                <ScalarProperty Name="productoStock" ColumnName="productoStock" />
+                <ScalarProperty Name="productoImagen" ColumnName="productoImagen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tipoProducto">
+            <EntityTypeMapping TypeName="BDModel.tipoProducto">
+              <MappingFragment StoreEntitySet="tipoProducto">
+                <ScalarProperty Name="tipoProductoId" ColumnName="tipoProductoId" />
+                <ScalarProperty Name="tipoProductoNombre" ColumnName="tipoProductoNombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

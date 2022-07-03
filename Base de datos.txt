@@ -1,0 +1,26 @@
+Base de datos "BDEntities".
+
+//query para crear la Tabla "productos":
+
+
+
+CREATE TABLE [dbo].[productos] (
+    [productoId]     INT             NOT NULL,
+    [productoNombre] VARCHAR (60)    NOT NULL,
+    [tipoProductoId] INT             NOT NULL,
+    [productoPrecio] INT             NOT NULL,
+    [productoStock]  INT             NOT NULL,
+    [productoImagen] VARBINARY (MAX) NOT NULL,
+    PRIMARY KEY CLUSTERED ([productoId] ASC),
+    CONSTRAINT [fk_tipo_producto] FOREIGN KEY ([tipoProductoId]) REFERENCES [dbo].[tipoProducto] ([tipoProductoId])
+);
+
+
+//query para crear la Tabla "tipoProducto":
+
+CREATE TABLE [dbo].[tipoProducto] (
+    [tipoProductoId]     INT          NOT NULL,
+    [tipoProductoNombre] VARCHAR (60) NOT NULL,
+    PRIMARY KEY CLUSTERED ([tipoProductoId] ASC)
+);
+

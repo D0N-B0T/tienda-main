@@ -1,0 +1,76 @@
+﻿@model Venta_y_Gestion.Models.productos
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h3>Registro de productos</h3>
+
+
+@using (Html.BeginForm("Create", "gestion", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.productoId, "Id", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.productoId, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.productoId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    
+    <div class="form-group">
+        @Html.LabelFor(model => model.productoNombre, "Nombre", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.productoNombre, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.productoNombre, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.tipoProductoId, "Categoría", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("tipoProductoId", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.tipoProductoId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.productoPrecio, "Precio", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.productoPrecio, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.productoPrecio, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.productoStock, "Stock", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.productoStock, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.productoStock, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.productoImagen, "Imagen", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="file" name="Imagen"/>
+        </div>
+    </div>
+    <br>
+    <br>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Registrar" class="btn btn-default" />
+            @Html.ActionLink("Volver", "Index")
+        </div>
+    </div>
+</div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
