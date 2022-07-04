@@ -27,7 +27,7 @@ namespace Venta_y_Gestion.Controllers
         
         public ActionResult Details(int? id)
         {
-            // si el id es nulo, redirigir a la vista de error
+            // si el id es nulo, redirigir a la vista de error asjdklasjdlas
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
